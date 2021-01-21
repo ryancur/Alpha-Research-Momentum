@@ -236,12 +236,14 @@ if __name__ == '__main__':
 
     dataset_base_freq = 'D'
     frequency = 'M'
-    plot_ticker = 'AAPL'
+    plot_ticker_long = 'AAPL'
+    plot_ticker_short = 'XOM'
+    risk_free_rate = 0.001 # As of 11/6/20
 
     top_bottom_n = 2 # Used in STEP 5 - getting the top and bottom performing stock(s)
 
-    ticker_symbols = ['FB', 'AMZN', 'AAPL', 'MSFT', 'GOOGL', 'CVX', 'EQT',
-                        'MRO', 'RRC', 'XOM']
+    ticker_symbols_long = ['FB', 'AMZN', 'AAPL', 'MSFT', 'GOOGL']
+    ticker_symbols_short = ['CVX', 'EQT', 'MRO', 'RRC', 'XOM']
 
     null_hyp = 0.0 #Default = 0.0
     alpha_lvl = 0.05 #Default = 0.05
@@ -251,114 +253,203 @@ if __name__ == '__main__':
     ar_multiple = freq_dict[frequency][1]
 
     ## STEP 0: Import datasets from CSV files and aggregate into a dataframe
-    prices = preprocess_data(ticker_symbols, values='Adj Close',
+    prices_long = preprocess_data(ticker_symbols_long, values='Adj Close',
                             relative_path='../data/')
 
-    start_date = prices.index.min()
-    end_date = prices.index.max()
+    prices_short = preprocess_data(ticker_symbols_short, values='Adj Close',
+                            relative_path='../data/')
+
+    start_date = prices_long.index.min()
+    end_date = prices_long.index.max()
 
     ## STEP 1: visualize stock data
     plt.figure()
-    plt.plot(prices[plot_ticker])
-    plt.title(f"{plot_ticker} Stock Price")
+    plt.plot(prices_long[plot_ticker_long])
+    plt.title(f"{plot_ticker_long} Stock Price - Long Group")
     plt.xlabel("Date")
     plt.ylabel("Price ($)")
     plt.tight_layout()
-    plt.savefig(f"../images/stock_data_{plot_ticker}.png")
+    plt.savefig(f"../images/sep_stock_price_lng_{plot_ticker_long}.png")
+    plt.show()
+
+    plt.figure()
+    plt.plot(prices_short[plot_ticker_short])
+    plt.title(f"{plot_ticker_short} Stock Price - Short Group")
+    plt.xlabel("Date")
+    plt.ylabel("Price ($)")
+    plt.tight_layout()
+    plt.savefig(f"../images/sep_stock_price_sh_{plot_ticker_short}.png")
     plt.show()
 
     ## STEP 2: resample data
     if frequency == dataset_base_freq:
-        resamp_prices = prices
+        resamp_prices_long = prices_long
     else:
-        resamp_prices = resample_prices(prices, frequency)
+        resamp_prices_long = resample_prices(prices_long, frequency)
+
+    if frequency == dataset_base_freq:
+        resamp_prices_short = prices_short
+    else:
+        resamp_prices_short = resample_prices(prices_short, frequency)
 
     plt.figure()
-    plt.plot(prices[plot_ticker], color='blue', alpha=0.5, label='Close')
-    plt.plot(resamp_prices[plot_ticker], color='navy', alpha=0.6,
+    plt.plot(prices_long[plot_ticker_long], color='blue', alpha=0.5, label='Close')
+    plt.plot(resamp_prices_long[plot_ticker_long], color='navy', alpha=0.6,
                 label=f'{plt_time_interval} Close')
-    plt.title(f"{plot_ticker} Stock - Close Vs {plt_time_interval} Close")
+    plt.title(f"{plot_ticker_long} Stock - Close Vs {plt_time_interval} Close")
     plt.xlabel("Date")
     plt.ylabel(f"Price ($)")
     plt.legend(loc='best')
     plt.tight_layout()
-    plt.savefig(f"../images/resampled_close_{plot_ticker}.png")
+    plt.savefig(f"../images/sep_resample_lng_{plot_ticker_long}.png")
+    plt.show()
+
+    plt.figure()
+    plt.plot(prices_short[plot_ticker_short], color='blue', alpha=0.5, label='Close')
+    plt.plot(resamp_prices_short[plot_ticker_short], color='navy', alpha=0.6,
+                label=f'{plt_time_interval} Close')
+    plt.title(f"{plot_ticker_short} Stock - Close Vs {plt_time_interval} Close")
+    plt.xlabel("Date")
+    plt.ylabel(f"Price ($)")
+    plt.legend(loc='best')
+    plt.tight_layout()
+    plt.savefig(f"../images/sep_resample_sh_{plot_ticker_short}.png")
     plt.show()
 
     ## STEP 3: generate log returns
-    returns = compute_log_returns(resamp_prices)
+    returns_long = compute_log_returns(resamp_prices_long)
 
     plt.figure()
-    plt.plot(returns[plot_ticker])
-    plt.hlines(y=0, xmin=returns.index.min(), xmax=returns.index.max(),
+    plt.plot(returns_long[plot_ticker_long])
+    plt.hlines(y=0, xmin=returns_long.index.min(), xmax=returns_long.index.max(),
                 color='black', linestyles='--', lw=1)
-    plt.title(f"{plot_ticker} {plt_time_interval} Log Returns")
+    plt.title(f"{plot_ticker_long} {plt_time_interval} Log Returns")
     plt.xlabel("Date")
     plt.ylabel(f"{plt_time_interval} Returns")
     plt.tight_layout()
-    plt.savefig(f"../images/log_returns_{plot_ticker}.png")
+    plt.savefig(f"../images/sep_log_returns_lng_{plot_ticker_long}.png")
+    plt.show()
+
+    returns_short = compute_log_returns(resamp_prices_short)
+
+    plt.figure()
+    plt.plot(returns_short[plot_ticker_short])
+    plt.hlines(y=0, xmin=returns_short.index.min(), xmax=returns_short.index.max(),
+                color='black', linestyles='--', lw=1)
+    plt.title(f"{plot_ticker_short} {plt_time_interval} Log Returns")
+    plt.xlabel("Date")
+    plt.ylabel(f"{plt_time_interval} Returns")
+    plt.tight_layout()
+    plt.savefig(f"../images/sep_log_returns_sh_{plot_ticker_short}.png")
     plt.show()
 
     ## STEP 4: view previous timestep and next timestep returns
-    prev_returns = shift_returns(returns, 1)
-    lookahead_returns = shift_returns(returns, -1)
+    # long stock universe
+    prev_returns_long = shift_returns(returns_long, 1)
+    lookahead_returns_long = shift_returns(returns_long, -1)
 
     plt.figure()
-    plt.plot(prev_returns.loc[:, plot_ticker], color='blue', alpha=0.5,
+    plt.plot(prev_returns_long.loc[:, plot_ticker_long], color='blue', alpha=0.5,
                 label='Shifted Returns')
-    plt.plot(returns.loc[:, plot_ticker], color='gray', alpha=0.5,
+    plt.plot(returns_long.loc[:, plot_ticker_long], color='gray', alpha=0.5,
                 label='Returns')
-    plt.hlines(y=0, xmin=returns.index.min(), xmax=returns.index.max(),
+    plt.hlines(y=0, xmin=returns_long.index.min(), xmax=returns_long.index.max(),
                 color='black', linestyles='--', lw=1)
-    plt.title(f"Previous Returns of {plot_ticker} Stock")
+    plt.title(f"Previous Returns of {plot_ticker_long} Stock")
     plt.xlabel("Date")
     plt.ylabel(f"{plt_time_interval} Returns")
     plt.legend(loc='best')
     plt.tight_layout()
-    plt.savefig(f"../images/shifted_prev_returns_{plot_ticker}.png")
+    plt.savefig(f"../images/sep_prev_returns_lng_{plot_ticker_long}.png")
     plt.show()
 
     plt.figure()
-    plt.plot(lookahead_returns.loc[:, plot_ticker], color='blue', alpha=0.5,
+    plt.plot(lookahead_returns_long.loc[:, plot_ticker_long], color='blue', alpha=0.5,
                 label='Shifted Returns')
-    plt.plot(returns.loc[:, plot_ticker], color='gray', alpha=0.5,
+    plt.plot(returns_long.loc[:, plot_ticker_long], color='gray', alpha=0.5,
                 label='Returns')
-    plt.hlines(y=0, xmin=returns.index.min(), xmax=returns.index.max(),
+    plt.hlines(y=0, xmin=returns_long.index.min(), xmax=returns_long.index.max(),
                 color='black', linestyles='--', lw=1)
-    plt.title(f"Lookahead Returns of {plot_ticker} Stock")
+    plt.title(f"Lookahead Returns of {plot_ticker_long} Stock")
     plt.xlabel("Date")
     plt.ylabel(f"{plt_time_interval} Returns")
     plt.legend(loc='best')
     plt.tight_layout()
-    plt.savefig(f"../images/shifted_lookahead_returns_{plot_ticker}.png")
+    plt.savefig(f"../images/sep_lookahead_returns_lng_{plot_ticker_long}.png")
+    plt.show()
+
+    #short stock universe
+    prev_returns_short = shift_returns(returns_short, 1)
+    lookahead_returns_short = shift_returns(returns_short, -1)
+
+    plt.figure()
+    plt.plot(prev_returns_short.loc[:, plot_ticker_short], color='blue', alpha=0.5,
+                label='Shifted Returns')
+    plt.plot(returns_short.loc[:, plot_ticker_short], color='gray', alpha=0.5,
+                label='Returns')
+    plt.hlines(y=0, xmin=returns_short.index.min(), xmax=returns_short.index.max(),
+                color='black', linestyles='--', lw=1)
+    plt.title(f"Previous Returns of {plot_ticker_short} Stock")
+    plt.xlabel("Date")
+    plt.ylabel(f"{plt_time_interval} Returns")
+    plt.legend(loc='best')
+    plt.tight_layout()
+    plt.savefig(f"../images/sep_prev_returns_sh_{plot_ticker_short}.png")
+    plt.show()
+
+    plt.figure()
+    plt.plot(lookahead_returns_short.loc[:, plot_ticker_short], color='blue', alpha=0.5,
+                label='Shifted Returns')
+    plt.plot(returns_short.loc[:, plot_ticker_short], color='gray', alpha=0.5,
+                label='Returns')
+    plt.hlines(y=0, xmin=returns_short.index.min(), xmax=returns_short.index.max(),
+                color='black', linestyles='--', lw=1)
+    plt.title(f"Lookahead Returns of {plot_ticker_short} Stock")
+    plt.xlabel("Date")
+    plt.ylabel(f"{plt_time_interval} Returns")
+    plt.legend(loc='best')
+    plt.tight_layout()
+    plt.savefig(f"../images/sep_lookahead_returns_sh_{plot_ticker_short}.png")
     plt.show()
 
     ## STEP 5: get the top n stocks and visualize
-    df_long = get_top_n(prev_returns, top_bottom_n)
-    df_short = get_top_n(-1*prev_returns, top_bottom_n)
+    df_long = get_top_n(prev_returns_long, top_bottom_n)
+    df_short = get_top_n(-1*prev_returns_short, top_bottom_n)
     print('Longed Stocks\n', df_long)
     print('Shorted Stocks\n', df_short)
 
     ## STEP 6: get portfolio returns and visualize
+    lookahead_returns = lookahead_returns_long.join(lookahead_returns_short)
+    df_long = df_long.join(prev_returns_short)
+    df_short = df_short.join(prev_returns_long)
+
+    for col in df_long.columns:
+        df_long[col] = np.where(df_long[col] == 1, 1, 0)
+
+    for col in df_short.columns:
+        df_short[col] = np.where(df_short[col] == 1, 1, 0)
+
     expected_portfolio_returns = portfolio_returns(df_long, df_short,
-                                    lookahead_returns, 2*top_bottom_n)
+                                lookahead_returns, 2*top_bottom_n)
 
     plt.figure()
     plt.plot(expected_portfolio_returns.T.sum())
-    plt.hlines(y=0, xmin=returns.index.min(), xmax=returns.index.max(),
+    plt.hlines(y=0, xmin=returns_long.index.min(), xmax=returns_long.index.max(),
                 color='black', linestyles='--', lw=1)
     plt.title(f"Expected Portfolio Returns")
     plt.xlabel("Date")
     plt.ylabel("Returns")
     plt.tight_layout()
-    plt.savefig(f"../images/portfolio_returns_{plot_ticker}.png")
+    plt.savefig("../images/sep_portfolio_returns.png")
     plt.show()
 
     ## STEP 7: annualized rate of return
     expected_portfolio_returns_by_date = expected_portfolio_returns.T.sum().dropna()
     portfolio_ret_mean = expected_portfolio_returns_by_date.mean()
     portfolio_ret_ste = expected_portfolio_returns_by_date.sem()
+    portfolio_ret_std = expected_portfolio_returns_by_date.std()
     portfolio_ret_annual_rate = (np.exp(portfolio_ret_mean * ar_multiple) - 1) * 100
+
 
     print(f"""
     Research Information:
@@ -367,13 +458,14 @@ if __name__ == '__main__':
         Dataset Base Time Interval:     {base_freq}
         Resampled Time Interval:        {plt_time_interval}
         Asset Sample:
-            {ticker_symbols}
+            {ticker_symbols_long + ticker_symbols_short}
     """)
 
     print(f"""
     Expected Portfolio Returns by Date:
         Mean:                           {portfolio_ret_mean:.6f}
         Standard Error:                 {portfolio_ret_ste:.6f}
+        Standard Deviation:             {portfolio_ret_std:.6f}
         Annualized Rate of Return:      {portfolio_ret_annual_rate:.2f}%
     """)
 

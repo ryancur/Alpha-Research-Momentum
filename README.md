@@ -14,6 +14,7 @@ The financial research process is a multi-step process that seeks to find a sign
 ![Research Process](images/a_alpha_research_process.png)
 Alpha Research Process *(Source: Udacity, AI for Trading)*
 
+
 It would be helpful to define some terms at this point.
 
 [**Alpha**](https://www.investopedia.com/terms/a/alpha.asp)
@@ -53,7 +54,25 @@ A stock or securities universe refers to a group of stocks that share a common f
 
 ### Cross-Sectional Momentum Strategy
 
-For this project I used a cross-sectional momentum strategy. This is a strategy where a trader invests in multiple stocks at the same time by ranking the stocks within a universe using historical data to calculate previous returns, then putting the best performers in a long portfolio and the worst performers in a short portfolio. For this specific project, I kind of did this already by putting tech stocks in the long portfolio and oil & gas stocks in the short portfolio. If I were to do this in practice, I would probably use an entire sector for my universe, such as technology, and then filter through all the stocks to get the n best and worst performers to add to my stock portfolios. This is where my implementation of this strategy deviates from the traditional approach. For an example of the traditional cross-sectional momentum strategy check out the cross_sec_momentum_strategy.py script. For this project I will be discussing the results from the cross_sec_momentum_strategy_separated.py script, which ranks the stocks within each portfolio (long and short) and then picks the best performers within the long portfolio and the worst performers in the short portfolio. This deviation was because I wanted to keep my data collection and stock universe small so i could spend more time on the strategy itself. 
+For this project I used a cross-sectional momentum strategy. This is a strategy where a trader invests in multiple stocks at the same time by ranking the stocks within a universe using historical data to calculate previous returns, then putting the best performers in a long portfolio and the worst performers in a short portfolio. For this specific project, I kind of did this already by putting tech stocks in the long portfolio and oil & gas stocks in the short portfolio. If I were to do this in practice, I would probably use an entire sector for my universe, such as technology, and then filter through all the stocks to get the n best and worst performers to add to my stock portfolios. This is where my implementation of this strategy deviates from the traditional approach. For an example of the traditional cross-sectional momentum strategy check out the cross_sec_momentum_strategy.py script. For this project I will be discussing the results from the cross_sec_momentum_strategy_separated.py script, which ranks the stocks within each portfolio (long and short) and then picks the best performers within the long portfolio and the worst performers in the short portfolio. This deviation was because I wanted to keep my data collection and stock universe small so I could spend more time learning the strategy.
+
+Here is a diagram that shows identification of top and bottom performers within a stock universe and then selecting three stocks to put into the long and short portfolios. The stock tikers are the universe, the plots of the closing prices shows the top and bottom performers. The list to the right shows the rank order of the stock returns. The folders represent the long and short portfolios and which stocks were put into each portfolio.
+
+![Cross-sectional Strategy](images/a_cross-sectional_strategy.png)
+Cross-sectional Strategy *(Source: Udacity, AI for Trading)*
+
+**Cross-sectional Strategy Steps:**
+1. Choose a stock universe and get data (used daily data)
+2. Re-sample prices for the desired investment interval, extract interval-end prices, compute log returns (used monthly)
+3. Rank by interval-end returns, select top and bottom n stocks - put top performers in long portfolio and worst performers in short portfolio
+4. Compute long and short portfolio returns (used arithmetic mean because I assumed each investment would get equal amount)
+5. Combine portfolio returns
+6. Continue to do this for the selected investment interval (trading)
+
+For a breakdown of the anatomy of a cross-sectional momentum strategy see below. Each number generally corresponds to the numbers in the steps above.
+
+![Cross-sectional Strategy](images/a_anatomy_cross_sectional_strategy.png)
+Cross-sectional Strategy *(Source: Udacity, AI for Trading)*
 
 
 ## Project Details

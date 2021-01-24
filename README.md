@@ -77,11 +77,8 @@ Cross-sectional Anatomy *(Source: Udacity, AI for Trading)*
 
 ## Project Details
 
-
-### Purpose
-
-
 ### Stock Universe & Data
+
 
 
 ### Trading Strategy

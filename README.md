@@ -71,8 +71,8 @@ Cross-sectional Strategy *(Source: Udacity, AI for Trading)*
 
 For a breakdown of the anatomy of a cross-sectional momentum strategy see below. Each number generally corresponds to the numbers in the steps above.
 
-![Cross-sectional Strategy](images/a_anatomy_cross_sectional_strategy.png)
-Cross-sectional Strategy *(Source: Udacity, AI for Trading)*
+![Cross-sectional Anatomy](images/a_anatomy_cross_sectional_strategy.png)
+Cross-sectional Anatomy *(Source: Udacity, AI for Trading)*
 
 
 ## Project Details

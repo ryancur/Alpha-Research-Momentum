@@ -53,6 +53,7 @@ A stock or securities universe refers to a group of stocks that share a common f
 
 ### Cross-Sectional Momentum Strategy
 
+For this project I used a cross-sectional momentum strategy. This is a strategy where a trader invests in multiple stocks at the same time by ranking the stocks within a universe using historical data to calculate previous returns, then putting the best performers in a long portfolio and the worst performers in a short portfolio. For this specific project, I kind of did this already by putting tech stocks in the long portfolio and oil & gas stocks in the short portfolio. If I were to do this in practice, I would probably use an entire sector for my universe, such as technology, and then filter through all the stocks to get the n best and worst performers to add to my stock portfolios. This is where my implementation of this strategy deviates from the traditional approach. For an example of the traditional cross-sectional momentum strategy check out the cross_sec_momentum_strategy.py script. For this project I will be discussing the results from the cross_sec_momentum_strategy_separated.py script, which ranks the stocks within each portfolio (long and short) and then picks the best performers within the long portfolio and the worst performers in the short portfolio. This deviation was because I wanted to keep my data collection and stock universe small so i could spend more time on the strategy itself. 
 
 
 ## Project Details

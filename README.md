@@ -91,9 +91,7 @@ Cross-sectional Anatomy *(Source: Udacity, AI for Trading)*
 
 ### Stock Universe & Data
 
-Stock Universe
-
-Long: AAPL, AMZN, FB, GOOGL, MSFT
+**Long: AAPL, AMZN, FB, GOOGL, MSFT**
 
 | Date | AAPL | AMZN | FB | GOOGL | MSFT |
 | --- | --- | --- | --- | --- | --- |
@@ -105,7 +103,7 @@ Long: AAPL, AMZN, FB, GOOGL, MSFT
 
 ![APPL Stock Price](images/sep_stock_price_lng_AAPL.png)
 
-Short: CVX, EQT, MRO, RRC, XOM
+**Short: CVX, EQT, MRO, RRC, XOM**
 
 | Date | CVX | EQT | MRO | RRC | XOM |
 | --- | --- | --- | --- | --- | --- |

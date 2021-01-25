@@ -119,19 +119,19 @@ Short: CVX, EQT, MRO, RRC, XOM
 
 ### Trading Strategy
 
-Re-sample prices for the desired investment interval
+**Re-sample prices for the desired investment interval**
 
 ![APPL Resample](images/sep_resample_lng_AAPL.png)
 
 ![XOM Resample](images/sep_resample_sh_XOM.png)
 
-compute log returns
+**Compute log returns**
 
 ![APPL Resample](images/sep_log_returns_lng_AAPL.png)
 
 ![XOM Resample](images/sep_log_returns_sh_XOM.png)
 
-Sample of Long Portfolio Trades (last 5 months)
+**Sample of Long Portfolio Trades (last 5 months)**
 
 | Date | AAPL | AMZN | FB | GOOGL | MSFT |
 | --- | :---: | :---: | :---: | :---: | :---: |
@@ -141,7 +141,7 @@ Sample of Long Portfolio Trades (last 5 months)
 |2020-10-31| 0 | 1 | 0 | 0 | 1 |
 |2020-11-30| 0 | 0 | 1 | 1 | 0 |
 
-Sample of Short Portfolio Trades (last 5 months)
+**Sample of Short Portfolio Trades (last 5 months)**
 
 | Date | CVX | EQT | MRO | RRC | XOM |
 | --- | :---: | :---: | :---: | :---: | :---: |
@@ -151,7 +151,7 @@ Sample of Short Portfolio Trades (last 5 months)
 |2020-10-31| 0 | 1 | 1 | 0 | 0 |
 |2020-11-30| 1 | 0 | 0 | 0 | 1 |
 
-Porfolio Returns
+**Portfolio Returns**
 
 ![Portfolio Returns](images/sep_portfolio_returns.png)
 
@@ -187,3 +187,13 @@ Reject the Null Hypothesis: **True**
 
 
 ## Sources
+
+Historical Stock Data (OHLC) was collected from [Yahoo Finance](https://finance.yahoo.com/)
+
+Project was from [Udacity](https://www.udacity.com/), AI for Trading
+
+Finding Alphas: A Quantitative Approach to Building Trading Strategies (Igor Tulchinsky)
+
+Trading Evolved: Anyone can Build Killer Trading Strategies in Python (Andreas Clenow)
+
+Systematic Trading: A unique new method for designing trading and investing systems (Robert Carver)

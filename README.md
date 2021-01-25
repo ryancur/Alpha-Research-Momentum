@@ -5,7 +5,7 @@ I wanted to work on this project to dive deeper into financial trading using alg
 ## Project Background & Observation
 To combat the 2020 novel coronavirus (Covid-19) outbreak within the United States, many city and state officials issued 4-6 week stay-at-home orders that started in March and ended between the end of April to the beginning of May. These stay-at-home orders caused an abrupt fall in demand for oil and an increase in the use of online platforms to conduct work remotely. The drop in demand for oil created a rise in the supply, which quickly lead to a shortage of space to store the excess oil causing prices to decrease into negative territory. This was preceded by lock-downs around the world where the virus was present and rapidly spreading. China's lockdown and subsequent drop in demand, in particular, triggered a price war between Saudi Arabia and Russia in early March due to both countries' refusal to cut crude oil production. On the other hand, large tech stocks continued to rise to historic all time highs as people shifted to remote work, utilizing web-conferencing and cloud computing technologies. For example, Apple's valuation was around $1 Trillion before the stay-at-home orders were put in place in March. After a sharp and rapid decline with the rest of the market, Apple's stock price quickly bounced back and increased to a new all-time-high and continued into new price discovery territory for months. Apple eventually stabilized around a $2 Trillion valuation, doubling its value in less than a year. Many of the other large technology companies saw similar patterns during this time period. The novel coronavirus has been a true "black swan" event with its abrupt effects causing major shifts in the demand and supply curves for many industries in 2020.
 
-I was curious about whether these extreme shifts and following trends in demand and supply between the technology stocks and the oil and gas stocks would provide a statistically significant alpha signal. I used this project to test this curiosity using a cross-sectional momentum strategy.
+I was curious about whether these extreme shifts and following trends in demand and supply between the technology stocks and the oil and gas stocks would provide a statistically significant alpha signal. I used this project to test this curiosity using a cross-sectional momentum strategy. For this particular project, I changed a few things from a typical cross-sectional momentum strategy, which I detail below.
 
 ### Financial Research Process
 
@@ -159,7 +159,7 @@ Then the log returns were computed. There are multiple reasons for using log ret
 5. When returns and log returns are small (their absolute values are much less than 1), their values are approximately equal.
 6. Logarithms can help make an algorithm more numerically stable.
 
-The first item in the list is used later when calculating the Annualized Rate of Return, which is used to help with human readability and comparison. 
+The first item in the list is used later when calculating the Annualized Rate of Return, which is used to help with human readability and comparison.
 
 **Sample of Long Portfolio Trades (last 5 months)**
 
@@ -208,8 +208,11 @@ The first item in the list is used later when calculating the Annualized Rate of
 
 Reject the Null Hypothesis: **True**
 
+For this specific type of strategy I got a p-value of .005857, which is less than alpha, meaning I would reject the null hypothesis. My interpretation of this hypothesis test would be that if the strategy has no effect in the market, .5857% of research studies will obtain the effect observed in this sample, or larger, because of random sample error. It is worded this way because we assume the null hypothesis is true. However, since I was able to obtain a p-value less than alpha, I reject the null hypothesis, moving forward with this strategy in practice.
+
 
 ## Further Work
+- Build more inclusive plots that look at all or more of the sample of stocks chosen.
 - Query an API, such as Yahoo Finance, to create a dynamic filter for the long and short portfolios.
 - Filter the top 10 best performing and worst performing equities into a long portfolio and a short portfolio dynamically.
 - Apply a coefficient to discriminate between stocks that follow a more stable trend to stocks that are more volatile (i.e. apply R2 from a linear regression).
@@ -228,4 +231,4 @@ Trading Evolved: Anyone can Build Killer Trading Strategies in Python (Andreas C
 
 Systematic Trading: A unique new method for designing trading and investing systems (Robert Carver)
 
-For hypothesis testing and statistics, I like Jim Frost's blog, [Statistics By Jim](https://statisticsbyjim.com/), for an intuitive dive into statistics.
+For hypothesis testing and statistics, I used Jim Frost's blog, [Statistics By Jim](https://statisticsbyjim.com/). I like his blog for an intuitive dive into statistics.

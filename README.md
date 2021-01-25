@@ -14,12 +14,24 @@ The financial research process is a multi-step process that seeks to find a sign
 ![Research Process](images/a_alpha_research_process.png)
 Alpha Research Process *(Source: Udacity, AI for Trading)*
 
+Steps:
+1. Observe & Research
+2. Form Hypothesis
+3. Validate Hypothesis
 
-It would be helpful to define some terms at this point.
+The first step is where an analyst or trader observes some kind of phenomenon or "effect" in the markets that they think might provide a profitable edge in trading. This is typically an observation of some kind of cause-and-effect consequence related to an event in the world. The effect is observed, and then the analyst starts to perform research around the phenomenon to understand what might have caused it or what it is correlated to.
+
+The next step is to form a hypothesis in order to test whether the effect observed and researched is statistically significant or whether it was caused by chance. This is performed using hypothesis testing, which requires an analyst to state an hypothesis and a null hypothesis. The null hypothesis states that the effect was created by random chance and is not a real phenomenon representative of the population, meaning there is no effect. In other words, there is not sufficient evidence present in the sample to reject the null hypothesis. For this project I use a null hypothesis value of 0.0 to represent no effect. The alternative hypothesis states that the effect was not created by chance and there is a higher chance that it is a real effect. In other words, there is sufficient evidence present in the sample to reject the null hypothesis, meaning that the effect is more likely to exist in the population. However, it is important to note that this does not mean that this is a real phenomenon, further validation is needed after getting a statistically significant p-value. With that said, financial trading is a business and businesses need to move quickly, so finding a statistically significant p-value at a pre-determined alpha level is usually good enough to continue with the strategy in practice. Alpha, in respect to statistics, is the significance level of the hypothesis test and is typically set at the .05 threshold.
+
+The final step in this three step process is to validate the hypothesis. This is where we use statistical analysis to determine whether we should reject or not reject the null hypothesis. To do this we start by calculating the mean return of our portfolio with respect to our resampled interval (more about this later). Then to test whether the mean return was caused by random chance or not, we perform a statistical test called a t-test. T-tests are used to compare means. In a hypothesis test, we compare our sample mean (mean return) to our null hypothesis value (0.0). This is done by calculating the t-statistic, which we can get by dividing the sample mean (mean return) by the standard error of the mean. After calculating the t-statistic we can use it to measure the probability of the observed effect in our sample, assuming the null hypothesis is true for the population. This is the p-value. The p-value helps us determine which hypothesis to support. Next, compare the p-value to the pre-determined alpha (significance level). If the p-value is less than or equal to alpha, reject the null hypothesis and continue to develop the strategy. If the p-value is greater than alpha, do not reject the null hypothesis and go back to the drawing board to come up with a new observed effect and strategy.
+
+I hope you can now see why it is called "seeking alpha." Analysts look for statistically significant effects in the market in order to outperform the market, where statistical significance is set by the alpha term in a hypothesis test. This is in opposition to something called the Efficient Market Theory, which is a hypothesis that the current price of a stock includes all relevant information, making alpha signals impossible to find in a perfectly efficient market. However, in practice that is rarely the case as ever changing and evolving events in the real world create effects that can cause changes in the markets that can be taken advantage of, even if the effect is short lived, which is often the case.
+
+Here are some financial terms with definitions and information from different investing related sources to help with the rest of this project.
 
 [**Alpha**](https://www.investopedia.com/terms/a/alpha.asp)
 
-Alpha is a term used to describe a strategy's ability to generate returns greater than the market returns. For example, if the S&P500 increased 5% in a particular year, a successful strategy that achieved "alpha" may have returned 10% in the same year. Alpha strategies are usually mentioned in conjunction with beta strategies, which passively track the market. The use of alpha strategies is generally called *active* trading/management, while the use of beta strategies is generally referred to as *passive* trading/management.
+Alpha, as applied to financial research, is a term used to describe a strategy's ability to generate returns greater than the market returns. For example, if the S&P500 increased 5% in a particular year, a successful strategy that achieved "alpha" may have returned 10% in the same year. Alpha strategies are usually mentioned in conjunction with beta strategies, which passively track the market. The use of alpha strategies is generally called *active* trading/management, while the use of beta strategies is generally referred to as *passive* trading/management.
 
 > Alpha (α) is a term used in investing to describe an investment strategy's ability to beat the market, or it's "edge." *(Source: [Investopedia](https://www.investopedia.com/terms/a/alpha.asp))*
 
@@ -195,3 +207,5 @@ Finding Alphas: A Quantitative Approach to Building Trading Strategies (Igor Tul
 Trading Evolved: Anyone can Build Killer Trading Strategies in Python (Andreas Clenow)
 
 Systematic Trading: A unique new method for designing trading and investing systems (Robert Carver)
+
+If you are interested in learning more information about hypothesis testing and statistics, I like Jim Frost's blog, [Statistics By Jim](https://statisticsbyjim.com/), for an intuitive dive into statistics.

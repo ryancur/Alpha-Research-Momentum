@@ -85,7 +85,7 @@ Cross-sectional Anatomy *(Source: Udacity, AI for Trading)*
 |Dataset End Date:| 2020-11-05 00:00:00 |
 |Dataset Base Time Interval:| Daily |
 |Resampled Time Interval:| Monthly |
-|Asset Sample:| ['FB', 'AMZN', 'AAPL', 'MSFT', 'GOOGL', 'CVX', 'EQT', 'MRO', 'RRC', 'XOM'] |
+|Stock Universe:| ['FB', 'AMZN', 'AAPL', 'MSFT', 'GOOGL', 'CVX', 'EQT', 'MRO', 'RRC', 'XOM'] |
 |Null Hypothesis| 0.0 |
 |Alpha| .05 |
 

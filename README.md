@@ -119,13 +119,13 @@ Short: CVX, EQT, MRO, RRC, XOM
 
 ### Trading Strategy
 
-**Re-sample prices for the desired investment interval**
+**Re-sample Prices**
 
 ![APPL Resample](images/sep_resample_lng_AAPL.png)
 
 ![XOM Resample](images/sep_resample_sh_XOM.png)
 
-**Compute log returns**
+**Compute Log Returns**
 
 ![APPL Resample](images/sep_log_returns_lng_AAPL.png)
 
@@ -151,14 +151,14 @@ Short: CVX, EQT, MRO, RRC, XOM
 |2020-10-31| 0 | 1 | 1 | 0 | 0 |
 |2020-11-30| 1 | 0 | 0 | 0 | 1 |
 
-**Portfolio Returns**
+**Expected Portfolio Returns**
 
 ![Portfolio Returns](images/sep_portfolio_returns.png)
 
 
 ### Results
 
-**Expected Portfolio Returns by Date**
+**Expected Portfolio Returns**
 
 | Category | Information |
 | --- | --- |

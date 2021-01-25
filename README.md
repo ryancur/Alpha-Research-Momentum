@@ -77,18 +77,106 @@ Cross-sectional Anatomy *(Source: Udacity, AI for Trading)*
 
 ## Project Details
 
+**Research Information**
+
+| Category | Information |
+| --- | --- |
+|Dataset Start Date:| 2015-11-06 00:00:00 |
+|Dataset End Date:| 2020-11-05 00:00:00 |
+|Dataset Base Time Interval:| Daily |
+|Resampled Time Interval:| Monthly |
+|Asset Sample:| ['FB', 'AMZN', 'AAPL', 'MSFT', 'GOOGL', 'CVX', 'EQT', 'MRO', 'RRC', 'XOM'] |
+|Null Hypothesis| 0.0 |
+|Alpha| .05 |
+
 ### Stock Universe & Data
 
+Stock Universe
 
+Long: AAPL, AMZN, FB, GOOGL, MSFT
+
+| Date | AAPL | AMZN | FB | GOOGL | MSFT |
+| --- | --- | --- | --- | --- | --- |
+|2020-10-30| 108.860001 | 3036.149902 | 263.109985 | 1616.109985 | 202.470001|
+|2020-11-02| 108.769997 | 3004.479980 | 261.359985 | 1624.319946 | 202.330002|
+|2020-11-03| 110.440002 | 3048.409912 | 265.299988 | 1645.660034 | 206.429993|
+|2020-11-04| 114.949997 | 3241.159912 | 287.380005 | 1745.849976 | 216.389999|
+|2020-11-05| 119.029999 | 3322.000000 | 294.679993 | 1762.500000 | 223.289993|
+
+![APPL Stock Price](images/sep_stock_price_lng_AAPL.png)
+
+Short: CVX, EQT, MRO, RRC, XOM
+
+| Date | CVX | EQT | MRO | RRC | XOM |
+| --- | --- | --- | --- | --- | --- |
+|2020-10-30| 69.500000 | 15.14 | 3.96 | 6.58 | 32.619999|
+|2020-11-02| 72.150002 | 15.47 | 4.15 | 6.59 | 33.990002|
+|2020-11-03| 71.739998 | 14.86 | 4.14 | 6.36 | 33.410000|
+|2020-11-04| 71.769997 | 14.20 | 4.27 | 6.04 | 33.230000|
+|2020-11-05| 72.139999 | 14.26 | 4.29 | 6.04 | 33.169998|
+
+![XOM Stock Price](images/sep_stock_price_sh_XOM.png)
 
 ### Trading Strategy
 
+Re-sample prices for the desired investment interval
 
-### Research
+![APPL Resample](images/sep_resample_lng_AAPL.png)
+
+![XOM Resample](images/sep_resample_sh_XOM.png)
+
+compute log returns
+
+![APPL Resample](images/sep_log_returns_lng_AAPL.png)
+
+![XOM Resample](images/sep_log_returns_sh_XOM.png)
+
+Long Portfolio Trades (last 5 months)
+
+| Date | AAPL | AMZN | FB | GOOGL | MSFT |
+| --- | :---: | :---: | :---: | :---: | :---: |
+|2020-07-31| 1 | 1 | 0 | 0 | 0 |
+|2020-08-31| 1 | 1 | 0 | 0 | 0 |
+|2020-09-30| 1 | 0 | 1 | 0 | 0 |
+|2020-10-31| 0 | 1 | 0 | 0 | 1 |
+|2020-11-30| 0 | 0 | 1 | 1 | 0 |
+
+Short Portfolio Trades (last 5 months)
+
+| Date | CVX | EQT | MRO | RRC | XOM |
+| --- | :---: | :---: | :---: | :---: | :---: |
+|2020-07-31| 0 | 1 | 0 | 1 | 0 |
+|2020-08-31| 1 | 0 | 1 | 0 | 0 |
+|2020-09-30| 0 | 0 | 1 | 0 | 1 |
+|2020-10-31| 0 | 1 | 1 | 0 | 0 |
+|2020-11-30| 1 | 0 | 0 | 0 | 1 |
+
+Porfolio Returns
+
+![Portfolio Returns](images/sep_portfolio_returns.png)
 
 
 ### Results
 
+**Expected Portfolio Returns by Date**
+
+| Category | Information |
+| --- | --- |
+|Mean| 0.021220 |
+|Standard Error| 0.008161 |
+|Standard Deviation| 0.063739 |
+|Annulaized Rate of Return| 29.00% |
+
+**Alpha Analysis**
+
+| Category | Information |
+| --- | --- |
+|Null Hypothesis| 0.0 |
+|Alpha| .05 |
+|t-value| 2.6 |
+|p-value| 0.005857 |
+
+Reject the Null Hypothesis: **True**
 
 
 ## Further Work

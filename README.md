@@ -208,4 +208,4 @@ Trading Evolved: Anyone can Build Killer Trading Strategies in Python (Andreas C
 
 Systematic Trading: A unique new method for designing trading and investing systems (Robert Carver)
 
-If you are interested in learning more information about hypothesis testing and statistics, I like Jim Frost's blog, [Statistics By Jim](https://statisticsbyjim.com/), for an intuitive dive into statistics.
+For hypothesis testing and statistics, I like Jim Frost's blog, [Statistics By Jim](https://statisticsbyjim.com/), for an intuitive dive into statistics.

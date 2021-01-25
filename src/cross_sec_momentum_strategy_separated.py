@@ -230,6 +230,10 @@ if __name__ == '__main__':
     ## Before Research - Test preprocess
     test_preprocess_data()
 
+    ###########################################################################
+    ### START HERE ###
+    ###########################################################################
+
     ## Research Setup - TODO: Change per hypothesis and datasets used
     freq_dict = {'D': ['Daily', 252], 'W': ['Weekly', 52], 'M': ['Monthly', 12],
                 'Q': ['Quarterly', 4], 'A': ['Annually', 1]}

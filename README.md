@@ -131,7 +131,7 @@ compute log returns
 
 ![XOM Resample](images/sep_log_returns_sh_XOM.png)
 
-Long Portfolio Trades (last 5 months)
+Sample of Long Portfolio Trades (last 5 months)
 
 | Date | AAPL | AMZN | FB | GOOGL | MSFT |
 | --- | :---: | :---: | :---: | :---: | :---: |
@@ -141,7 +141,7 @@ Long Portfolio Trades (last 5 months)
 |2020-10-31| 0 | 1 | 0 | 0 | 1 |
 |2020-11-30| 0 | 0 | 1 | 1 | 0 |
 
-Short Portfolio Trades (last 5 months)
+Sample of Short Portfolio Trades (last 5 months)
 
 | Date | CVX | EQT | MRO | RRC | XOM |
 | --- | :---: | :---: | :---: | :---: | :---: |

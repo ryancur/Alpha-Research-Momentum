@@ -89,6 +89,14 @@ Cross-sectional Anatomy *(Source: Udacity, AI for Trading)*
 
 ## Project Details
 
+The datasets were downloaded from Yahoo Finance in CSV format. Each dataset included daily Open, High, Low, Close, Adjusted Close, and Volume columns. I used the Adjusted Close column for my data. I chose 5 stocks from the technology sector and 5 stocks from the oil & gas sector. For this project, I then created a technology stock universe and an oil & gas stock universe and took only long positions from the tech universe and only short positions from the oil & gas sector. I resampled the data from daily into monthly intervals. This means trading/portfolio rebalancing was done on a monthly basis. Each month I selected the top and bottom two stocks, based on previous returns, and added the top performing stocks to the long portfolio and the bottom performing stocks to the short portfolio. For simplicity, each stock received equal investment. This allowed me to use the arithmetic mean when computing the portfolio returns. My null hypothesis was that the true monthly return mean was zero. I used a one-sample t-test to determine whether to reject the null hypothesis with a significance level (alpha) of .05.
+
+For the purposes of plotting, I used Apple's stock ticker for the long portfolio and Exxon's stock ticker for the short portfolio.
+
+Tech Stack: Python3, Pandas, Numpy, Matplotlib, Scipy
+
+Script: cs_momentum_strategy_separated.py
+
 **Research Information**
 
 | Category | Information |
@@ -127,7 +135,7 @@ Cross-sectional Anatomy *(Source: Udacity, AI for Trading)*
 
 ![XOM Stock Price](images/sep_stock_price_sh_XOM.png)
 
-### Trading Strategy
+### Trading Strategy Steps
 
 **Re-sample Prices**
 
@@ -135,11 +143,23 @@ Cross-sectional Anatomy *(Source: Udacity, AI for Trading)*
 
 ![XOM Resample](images/sep_resample_sh_XOM.png)
 
+This is where the daily prices were resampled into month-end prices to align with my monthly portfolio rebalance schedule.
+
 **Compute Log Returns**
 
 ![APPL Resample](images/sep_log_returns_lng_AAPL.png)
 
 ![XOM Resample](images/sep_log_returns_sh_XOM.png)
+
+Then the log returns were computed. There are multiple reasons for using log returns. From a machine learning perspective, stock prices are time series data and typically have something called a unit root, which makes time series data difficult to model. When working with time series we need to remove the trend and make the data stationary. Computing the log returns is one way to do this. Differencing is another. Here is a list of other reasons why analysts use log returns according to Udacity's AI for Trading course:
+1. Log returns can be interpreted as continuously compounded returns.
+2. Log returns are time-additive. The multi-period log return is simply the sum of single period log returns.
+3. The use of log returns prevents security prices from becoming negative in models of security returns.
+4. For many purposes, log returns of a security can be reasonably modeled as distributed according to a normal distribution.
+5. When returns and log returns are small (their absolute values are much less than 1), their values are approximately equal.
+6. Logarithms can help make an algorithm more numerically stable.
+
+The first item in the list is used later when calculating the Annualized Rate of Return, which is used to help with human readability and comparison. 
 
 **Sample of Long Portfolio Trades (last 5 months)**
 

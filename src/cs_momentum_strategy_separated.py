@@ -242,7 +242,6 @@ if __name__ == '__main__':
     frequency = 'M'
     plot_ticker_long = 'AAPL'
     plot_ticker_short = 'XOM'
-    risk_free_rate = 0.001 # As of 11/6/20
 
     top_bottom_n = 2 # Used in STEP 5 - getting the top and bottom performing stock(s)
 
